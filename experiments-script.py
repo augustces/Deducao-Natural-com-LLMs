@@ -1,17 +1,8 @@
 # -*- coding: utf-8 -*-
-"""Experimentos Julho 2025
-# Adaptado para multiplos Experimentos:
-### Modelos AceitosÇ
-- GPTs ;
-- Modelos Disponíveis no Ollama;
----
-### Tipos de Questões
-- Questões de Lógica de Primeira Ordem;
-- Questões de Lógica Proposicional;
----
+
 ### Formato de Questões
 - Questões Escritas em Latex;
-- Questões Escritas na Linguagem do NADIA;
+- Questões Escritas na Linguagem do Assistent;
 ---
 ### Tipo de Prompt
 - Com 1 questão de Entrada;
@@ -28,7 +19,6 @@ import os
 import configparser
 import csv
 ##atualizacao
-from nadia.nadia_pt_fo import check_proof
 import ollama
 import argparse
 
@@ -199,7 +189,7 @@ questoes['Q40'] = r'$ A \rightarrow  B \vdash\lnot  A \vee  B $'
 questoes['Q41'] = r'$\lnot  A \vee  B \vdash  A \rightarrow  B $'
 
 #questoes de logica e de primeira ordem escritas no formato aceito
-#pela ferramenta NADIA
+#pelo formal proof assistant
 questoes_gerais = dict()
 questoes_gerais["Q1"] = "Ax P(x) |- ~Ex ~P(x)"
 questoes_gerais["Q2"] = "~Ex ~P(x) |- Ax P(x)"
@@ -296,7 +286,7 @@ def chamada_api_ollama( conversa_entrada,id_modelo = 'gemma2:2b', stream = False
 # Texto Padrao da primeira mensagem do usuario
 user_content_proposicional = r"""
 Questão:
-escreva a prova do teorema a seguir, usando o sistema de dedução natural no estilo fitch e de acordo com o formato aceito pelo NADIA.
+escreva a prova do teorema a seguir, usando o sistema de dedução natural no estilo fitch e de acordo com o formato aceito pelo <omitted>.
 Teorema:""
 A->B, B->C |- A->C
 ""
@@ -321,7 +311,7 @@ print(assistant_response_proposicional)
 # Texto Padrao da primeira mensagem do usuario
 user_content_LPO = r"""
 Questão:
-escreva a prova do teorema a seguir, usando o sistema de dedução natural no estilo fitch e de acordo com o formato aceito pelo NADIA.
+escreva a prova do teorema a seguir, usando o sistema de dedução natural no estilo fitch e de acordo com o formato aceito pelo <omitted>.
 Teorema:""
 Ax (H(x)->M(x)), Ax ~M(x) |- ~Ex H(x)
 ""
@@ -380,7 +370,7 @@ def build_a_chat(user_content,assistant_response,questao_entrada):
     template_tutorial = template_tutorial + "\n\n"
     user_question = f"""
       Questão:
-escreva a prova do teorema a seguir, usando o sistema de dedução natural no estilo fitch e de acordo com o formato aceito pelo NADIA.
+escreva a prova do teorema a seguir, usando o sistema de dedução natural no estilo fitch e de acordo com o formato aceito pelo <omitted>.
       Teorema:""
       ${questao_entrada}$
       ""

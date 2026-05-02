@@ -1,5 +1,5 @@
 ### Introdução
-O guia a seguir detalha o formato aceito pelo NADIA para a construção de provas de Dedução Natural em Lógica Proposicional e Lógica de Primeira Ordem no estilo Fitch:
+O guia a seguir detalha o formato aceito pelo Assistente de provas para a construção de provas de Dedução Natural em Lógica Proposicional e Lógica de Primeira Ordem no estilo Fitch:
 **Importante:**
  - Os átomos e os predicados são escritos em letras maiúsculas (e.g. `A`, `B`, `H(x)`).
  - As variáveis são escritas com a primeira letra em minúsculo, podendo ser seguida de letras e números (e.g. `x`, `x0`, `xP0`).
@@ -35,7 +35,7 @@ n. Xn  pre
 ### Regras da Conjunção
 
 A regra da introdução da conjunção (&i) permite concluir a fórmula A&B em uma linha p se A e B foram demonstradas nas linhas m (ou n) e n (ou m), respectivamente, anteriores a linha p e que não foram descartadas. Abaixo exibe-se a aplicação &i da fórmula A&B na linha 3 a partir das fórmulas A e B, definidas nas linhas 1 e 2, respectivamente, que são anteriores a linha 3. 
-##### NADIA - Exemplo: A,B|-A&B
+##### Assistente de provas - Exemplo: A,B|-A&B
 ***
 ```
 1. A     pre
@@ -44,7 +44,7 @@ A regra da introdução da conjunção (&i) permite concluir a fórmula A&B em u
 ```
 ***
 A regra da **eliminação da conjunção (&e)** permite concluir a fórmula A (ou B) na linha m a partir da eliminação à esquerda (ou à direita) da conjunção da fórmula A&B da linha n (anterior a p e não foi descartada). Abaixo exibe-se uma aplicação da regra na qual A é obtida na linha 3 pela eliminação da conjunção à esquerda da fórmula A&B da linha 1.
-##### NADIA - Exemplo: A&B,C|-A&C
+##### Assistente de provas - Exemplo: A&B,C|-A&C
 ***
 ```
 1. A&B    pre
@@ -56,7 +56,7 @@ A regra da **eliminação da conjunção (&e)** permite concluir a fórmula A
 ### Regras da Implicação
 
 A regra da **eliminação da implicação (->e)**, também conhecida como _Modus Ponens_, permite concluir a fórmula B na linha p a partir da eliminação da implicação da fórmula A->B da linha m (ou n) e A da linha n (ou m), anteriores a p e não descartadas. Abaixo exibe-se uma aplicação da regra na qual a fórmula C é obtida na linha 4 pela eliminação da implicação das fórmulas B e B->C das linha 3 e 2, respectivamente.
-##### NADIA - Exemplo: A&B,B->C|-C
+##### Assistente de provas - Exemplo: A&B,B->C|-C
 ***
 ```
 1. A&B    pre
@@ -67,7 +67,7 @@ A regra da **eliminação da implicação (->e)**, também conhecida como _Mod
 ***
 A regra da **introdução da implicação (->i)** constrói condicionais que não ocorrem como premissas. Para construção de um condicional é necessário realizar _raciocínio hipotético_, isto é, supor _temporariamente_ que uma dada fórmula é verdadeira. Chamamos esta fórmula de _hipótese_. Assim, utilizamos _caixas de demonstração_, que servem para delimitar o _escopo da hipótese temporária_. Nesta regra, para provar o condicional A->C na linha n+1, colocamos A como **hipótese** no topo de uma caixa (linha m), aplicamos um número finito de regras de forma a obter C na linha n. Todo o raciocínio para obter C depende da veracidade de A e, por isso, as fórmulas resultante deste raciocínio ficam delimitadas na caixa. Na linha seguinte (n+1) podemos aplicar a regra ->i para obter A→C, sendo que este condicional não mais depende da hipótese A. Na justificativa da linha n+1 utilizamos o nome da regra seguido das linhas inicial e final da caixa (->i m-n). Abaixo exibe-se uma aplicação da regra na qual a fórmula A->C é obtida na linha 6 a partir da caixa das linhas 3 a 5 em que A é a hipótese.
 Observe que para a obtenção de C é possível utilizar quaisquer outras fórmulas como premissas e conclusões provisórias feitas até então. Demonstrações podem ter caixas dentro de caixas, ou pode-se abrir novas caixas depois de fechar outras. No entanto, existem regras sobre quais fórmulas podem ser utilizadas em que ponto na demonstração. Em geral, só podemos usar uma fórmula em um determinado ponto se esta fórmula ocorre _antes_ desse ponto e se nenhuma caixa que contenha a ocorrência desta fórmula tenha sido fechada.
-##### NADIA - Exemplo: A->B,B->C|-A->C
+##### Assistente de provas - Exemplo: A->B,B->C|-A->C
 ***
 ```
 1. A->B      pre
@@ -82,7 +82,7 @@ Observe que para a obtenção de C é possível utilizar quaisquer outras fór
 ### Regras da Disjunção
 
 A regra da **introdução da disjunção (|i)** permite concluir a fórmula A|B em uma linha p se A (ou B) ocorre em uma linha m anterior a p e que não foi descartada. Abaixo exibe-se a aplicação da introdução da disjunção na linha 3 com a introdução de A|B a partir da fórmula A definida na linha 2.
-##### NADIA - Exemplo: (A∨B)→C⊢A→C
+##### Assistente de provas - Exemplo: (A∨B)→C⊢A→C
 ***
 ```
 1. (A|B)->C      pre
@@ -94,7 +94,7 @@ A regra da **introdução da disjunção (|i)** permite concluir a fórmula A
 ```
 ***
 A regra da **disjunção eliminação (|e)**, permite concluir uma fórmula X na linha p+1 se eliminarmos a disjunção da fórmula A|B na linha m e se fizermos a suposição de A em uma caixa, na linha m, e a suposição de B em outra caixa, na linha n+1, tal que ambas as caixas tenham como conclusão X, nas linhas n e p, respectivamente, por meio de uma sequência finita de passos (regras). Note que essa regra se assemelha a introdução da implicação no sentido de que fazemos raciocínio hipotético, nas caixas de (m+1)−n e (n+1)−p. Abaixo exibe-se a aplicação da eliminação da disjunção na linha 8, na qual concluímos C, a partir da disjunção de A|B na linha 3 e das caixas 4−5 e 6−7 onde supomos A na linha 4 e concluímos C na linha 5 e supomos B na linha 6 e concluímos C na linha 7.
-##### NADIA - Exemplo: A->C,B->C,(A|B)|-C
+##### Assistente de provas - Exemplo: A->C,B->C,(A|B)|-C
 ***
 ```
 1. A->C       pre
@@ -112,7 +112,7 @@ A regra da **disjunção eliminação (|e)**, permite concluir uma fórmula X�
 ### Regras da Negação
 
 A regra da **negação eliminação (~e)** envolve a noção de **contradição**. Contradições são expressões da forma X&~X ou ~X∧X onde X é qualquer fórmula da lógica proposicional. A fórmula @ é utilizada para denotar uma contradição e este fato é expresso na regra ~e. Nesta regra temos que uma fórmula A na linha m (ou n) e a sua negação ¬A na linha n (ou m) podem ser combinadas para aparecimento da contradição @ na linha p com a aplicação da regra ~e. Abaixo exibe-se uma aplicação da regra na qual a contradição @ é obtida na linha 3 devido às fórmulas A na linha 1 e ¬A na linha 2.
-##### NADIA - Exemplo: A,¬A⊢⊥
+##### Assistente de provas - Exemplo: A,¬A⊢⊥
 ***
 ```
 1. A     pre
@@ -121,7 +121,7 @@ A regra da **negação eliminação (~e)** envolve a noção de **contradiç�
 ```
 ***
 A regra da **negação introdução (¬i)**, é uma regra que envolve raciocínio hipotético e contradição. Se tomarmos A como hipótese (linha m) e, após a aplicação de um número finito de regras, chegarmos a uma contradição @ na linha n, significa que a hipótese não pode ser verdadeira. Desse modo, finalizamos nosso raciocínio hipotético introduzindo a negação na hipótese e obtendo ~A na linha n+1. Abaixo exibe-se um exemplo da aplicação da regra ~i, para provamos ~A na linha 6, assumimos A como hipótese no topo da caixa na linha 3 e chegamos a uma contradição no final da caixa na linha 5.
-##### NADIA - Exemplo: A->B,~B|-~A
+##### Assistente de provas - Exemplo: A->B,~B|-~A
 ***
 ```
 1. A->B      pre
@@ -136,7 +136,7 @@ A regra da **negação introdução (¬i)**, é uma regra que envolve raciocín
 ### Regra da Contradição
 
 A **regra da contradição eliminação** permite concluir uma fórmula qualquer B na linha n se demonstramos em uma linha m, anterior a n, a contradição. Abaixo exibe-se a demonstração de B na linha 4 a partir da eliminação da contradição @ da linha 3.
-##### NADIA - Exemplo: |- A->(~A->B)
+##### Assistente de provas - Exemplo: |- A->(~A->B)
 ***
 ```
 1. {   A         hip
@@ -152,7 +152,7 @@ A **regra da contradição eliminação** permite concluir uma fórmula qualqu
 ### Regra de Redução ao Absurdo
 
 A regra de **redução ao absurdo** é uma regra na qual para provarmos uma fórmula X em uma linha n+1, iremos supor temporariamente a negação da fórmula, ~X, em uma caixa que inicia na linha m e que conclui a contradição, @, na linha n, após uma sequência de aplicações de regras. Abaixo exibe-se a demonstração de A|~A, também conhecido como terceiro-excluído. Para provarmos A|~A na linha 8, fazemos a suposição de ~(A|~A), na linha 1 (início da caixa) e concluímos a contradição @, na linha 7 (fim da caixa).
-### NADIA - Exemplo: ⊢A∨¬A
+### Assistente de provas - Exemplo: ⊢A∨¬A
 ***
 ```
 1. {   ~(A|~A)     hip
@@ -170,7 +170,7 @@ A regra de **redução ao absurdo** é uma regra na qual para provarmos uma f�
 ### Regra do Copie
 
 A regra do **copie**, apresentada, é necessária, no estilo de Fitch, para permitir concluir uma caixa com uma fórmula que já apareceu anteriormente na demonstração. Abaixo exibe-se que, para demonstrar A->B, na linha 10, é preciso que a caixa que justifica a introdução da implicação inicie com A, linha 8, e termine com B, linha 9. Ocorre que a justificativa de B já havia sido realizada e, portanto, a justificativa da linha 9 é a cópia da fórmula da linhas 7.
-##### NADIA - Exemplo: ~A|B ⊢A->B
+##### Assistente de provas - Exemplo: ~A|B ⊢A->B
 ***
 ```
 1. ~A|B      pre
@@ -194,7 +194,7 @@ A regra do **copie**, apresentada, é necessária, no estilo de Fitch, para per
 
 A regra da **eliminação do universal (Ae)** permite concluir a fórmula Fxt em uma linha p se ∀xF foi demonstrada na linha m, desde que o termo t seja substituível para a variável x em F. Abaixo exibe-se a aplicação de Ae da fórmula H(s) ->M(s) na linha 3 a partir da fórmula Ax(H(x)->M(x)), definida na linha 1.
 
-##### NADIA - Exemplo: Ax(H(x)->M(x)),H(s)|-M(s)
+##### Assistente de provas - Exemplo: Ax(H(x)->M(x)),H(s)|-M(s)
 ***
 ```
 1. Ax(H(x)->M(x))   pre
@@ -204,7 +204,7 @@ A regra da **eliminação do universal (Ae)** permite concluir a fórmula Fxt
 ```
 ***
 A regra da **introdução do universal (Ai)**, é a regra na qual para provarmos AxF na linha n+1, iremos supor que para uma variável "a" qualquer (arbitrária) em uma caixa que inicia na linha m e que conclui Fxa, na linha n. Dizemos que a variável "a" é qualquer se ela é uma variável nova na linha m, ou seja, a não ocorre como variável livre de qualquer fórmula que aconteça anteriormente a linha m que não esteja em uma caixa fechada. Abaixo exibe-se a introdução do universal na linha 7 para provar AxM(x) a partir da suposição de a, no início da caixa, na linha 3, e demonstramos M(a) ao final da caixa, na linha 6. Note que a variável a escolhida não é uma variável livre das fórmulas das linhas 1 e 2.
-##### NADIA - Exemplo: Ax(H(x)->M(x)),AxH(x)|-∀xM(x)
+##### Assistente de provas - Exemplo: Ax(H(x)->M(x)),AxH(x)|-∀xM(x)
 ***
 ```
 1. Ax(H(x)->M(x))        pre
@@ -220,7 +220,7 @@ A regra da **introdução do universal (Ai)**, é a regra na qual para provarm
 ### Regras do Existencial
 
 A regra da **introdução do existencial (Ei)**, é a regra na qual a fórmula ExF pode ser concluída em uma linha p se Fxt foi demonstrada na linha m, desde que o termo t seja substituível para a variável x em F. Abaixo exibe-se a aplicação Ei da fórmula ExP(x) na linha 3 a partir da fórmula P(a), definida na linha 1.
-##### NADIA - Exemplo: P(a),ExP(x)->B|-B
+##### Assistente de provas - Exemplo: P(a),ExP(x)->B|-B
 ***
 ```
 1. P(a)              pre
@@ -231,7 +231,7 @@ A regra da **introdução do existencial (Ei)**, é a regra na qual a fórmula�
 ***
 A regra da **eliminação do existencial (Ee)**, é a regra na qual para provarmos uma fórmula α, na linha p+1, iremos eliminar o existencial da fórmula ExF, na linha m, supondo a fórmula Fxa para alguma variável a em uma caixa que inicia na linha n e que concluiu com uma fórmula α ao final da caixa, na linha p, desde que "a" não ocorra na conclusão α. Nesta regra sabemos que a fórmula F vale para algum elemento. Entretanto, não podemos assumir nenhuma propriedade específica para esta variável. Assim, a variável a deve ser uma variável nova na linha n, ou seja, a não ocorre como variável livre de qualquer fórmula que aconteça anteriormente a linha n que não esteja em uma caixa fechada e nem pode estar na conclusão α da regra.  
 Abaixo exibe-se a eliminação do existencial para concluir @ na linha 9, a partir da fórmula ExH(x), na linha 3, e pela caixa que inicia na linha 4 com a suposição da fórmula H(a) com a (nova) variável a e que termina a caixa na linha 8 com a conclusão @.
-##### NADIA - Exemplo: Ax(H(x)->M(x)),Ax~M(x)|-~AxH(x)
+##### Assistente de provas - Exemplo: Ax(H(x)->M(x)),Ax~M(x)|-~AxH(x)
 ***
 ```
 1. Ax(H(x)->M(x))         pre
@@ -251,8 +251,8 @@ Abaixo exibe-se a eliminação do existencial para concluir @ na linha 9, a p
 
 ### Erros nas Regras do Universal e do Existencial
 
-Importante ressaltar que as restrições impostas as regras da introdução do universal e da eliminação do existencial são fundamentais para que todas as demonstrações sejam corretas. Na sequência, iremos apresentar alguns exemplos de demonstrações incorretas que não observam as restrições podem nos conduzir a conclusões erradas a partir de um conjunto de premissas. Os exemplos serão definidos no NADIA e os respectivos erros serão apontados pela ferramenta.
-##### NADIA - Exemplo de Demonstração incorreta: P(a)|-AxP(x)
+Importante ressaltar que as restrições impostas as regras da introdução do universal e da eliminação do existencial são fundamentais para que todas as demonstrações sejam corretas. Na sequência, iremos apresentar alguns exemplos de demonstrações incorretas que não observam as restrições podem nos conduzir a conclusões erradas a partir de um conjunto de premissas. Os exemplos serão definidos no Assistente de provas e os respectivos erros serão apontados pela ferramenta.
+##### Assistente de provas - Exemplo de Demonstração incorreta: P(a)|-AxP(x)
 **Erro:** Na introdução do universal, a variável escolhida não pode ocorrer anteriormente.
 ***
 ```
@@ -263,7 +263,7 @@ Importante ressaltar que as restrições impostas as regras da introdução do u
 4. Ax P(x)        Ai 2-3
 ```
 ***
-##### NADIA - Exemplo de Demonstração incorreta: ExP(x)|-P(a)
+##### Assistente de provas - Exemplo de Demonstração incorreta: ExP(x)|-P(a)
 **Erro:** Na conclusão da eliminação do existencial, a variável escolhida na eliminação não pode ocorrer.
 ***
 ```
@@ -273,7 +273,7 @@ Importante ressaltar que as restrições impostas as regras da introdução do u
 3. P(a)      Ee 1, 2-2
 ```
 ***
-##### NADIA - Exemplo de Demonstração incorreta: Ex Par(x),Ex Impar(x)|-Ex(Par(x)&Impar(x))
+##### Assistente de provas - Exemplo de Demonstração incorreta: Ex Par(x),Ex Impar(x)|-Ex(Par(x)&Impar(x))
 **Erro:** Na eliminação do existencial, a variável escolhida na eliminação já ocorria anteriormente.
 ***
 ```
@@ -289,7 +289,7 @@ Importante ressaltar que as restrições impostas as regras da introdução do u
 8. Ex (PAR(x)&IMPAR(x))             Ee 1, 3-7
 ```
 ***
-##### NADIA - Exemplo de Demonstração incorreta: AyEx MENOR(y,x)|-Ex MENOR(x,x)
+##### Assistente de provas - Exemplo de Demonstração incorreta: AyEx MENOR(y,x)|-Ex MENOR(x,x)
 **Erro:** Na eliminação do existencial, a variável escolhida na eliminação já ocorria anteriormente.
 ***
 ```
