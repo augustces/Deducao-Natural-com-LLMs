@@ -151,7 +151,7 @@ A **regra da contradição eliminação** permite concluir uma fórmula qualqu
 ***
 ### Regra de Redução ao Absurdo
 
-A regra de **redução ao absurdo** é uma regra na qual para provarmos uma fórmula X em uma linha n+1, iremos supor temporariamente a negação da fórmula, ~X, em uma caixa que inicia na linha m e que conclui a contradição, @, na linha n, após uma sequência de aplicações de regras. Abaixo exibe-se a demonstração de A|~A, também conhecido como terceiro-excluído. Para provarmos A|~A na linha 8, fazemos a suposição de ~(A|~A), na linha 1 (início da caixa) e concluímos a contradição @, na linha 7 (fim da caixa).
+A regra de **redução ao absurdo** é uma regra na qual para provarmos uma fórmula X em uma linha n+1, iremos supor temporariamente a negação da fórmula, `~X`, em uma caixa que inicia na linha m e que conclui a contradição, `@`, na linha n, após uma sequência de aplicações de regras. Abaixo exibe-se a demonstração de `A|~A`, também conhecido como terceiro-excluído. Para provarmos `A|~A` na linha 8, fazemos a suposição de `~(A|~A)`, na linha 1 (início da caixa) e concluímos a contradição `@`, na linha 7 (fim da caixa).
 ### Assistente de provas - Exemplo: ⊢A∨¬A
 ***
 ```
